@@ -1,0 +1,20 @@
+var express = require('express');
+var app = express();
+var http = require('http');
+var server = http.createServer(app);
+var port = 9999;
+
+app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/public'));
+
+app.get('/', function(request, response) {
+  response.render('index', request.query);
+});
+
+app.get('/reflect.json', function(request, response) {
+  response.render('reflect', {query: request.query});
+});
+
+server.listen(port, function() {
+  console.log('running server on port' + port);
+});
